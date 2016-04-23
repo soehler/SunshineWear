@@ -416,6 +416,11 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                     double low = cursor.getDouble(INDEX_MIN_TEMP);
                     String desc = cursor.getString(INDEX_SHORT_DESC);
 
+                    //Send weather data do be displayed on sunshine Watchface on connected wearable
+                    //Considering that index 0 is always "today"
+                    SunshineWearableConnector sunshineWearableConnector = new SunshineWearableConnector(getContext());
+                    sunshineWearableConnector.notifyWearable(weatherId,String.valueOf(high),String.valueOf(low));
+
                     int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
                     Resources resources = context.getResources();
                     int artResourceId = Utility.getArtResourceForWeatherCondition(weatherId);
